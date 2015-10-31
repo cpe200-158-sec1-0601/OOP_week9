@@ -11,6 +11,7 @@ namespace HighLowCardGame
         private Deck _playingdeck;
         private int _count;
         private string _name;
+        private int order = 0;
 
         public Deck PlayingDeck
         {
@@ -27,12 +28,23 @@ namespace HighLowCardGame
             get;
             set;
         }
+        public int Order
+        {
+            get;
+            set;
+        }
 
-        public Player(string pName = "Anonymous")
+        public Player(int pOrder = 0, string pName = "Anonymous")
         {
             PlayingDeck = new Deck();
             Count = 0;
             Name = pName;
+            Order = pOrder;
+        }
+
+        public void ShowPlayerScore()
+        {
+            Console.WriteLine("[Player " + Order + "] has " + Count + " counting card in his/her pile");
         }
     }
 }

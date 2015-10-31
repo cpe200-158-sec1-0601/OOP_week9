@@ -40,13 +40,14 @@ namespace HighLowCardGame
                 Cards[i] = Cards[j];
                 Cards[j] = temp;
             }
+            //Console.WriteLine("[Shuffle] Done.");
         }
 
         public void ViewCardsinDeck()
         {
-            foreach (Card p1Card in this.Cards)
+            foreach (Card aCard in this.Cards)
             {
-                Console.WriteLine(p1Card);
+                Console.WriteLine(aCard);
             }
         }
     }
