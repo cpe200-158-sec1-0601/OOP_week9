@@ -22,7 +22,7 @@ namespace HighLowCardGame
             set;
         }
 
-        protected string[] suit =  { "Hearts", "Diamonds", "Clubs", "Spades" };
+        protected string[] suit =  { "Clubs", "Diamonds", "Hearts", "Spades" };
         protected string[] face = { "Ace", "Deuce", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
 
         public override string ToString()
