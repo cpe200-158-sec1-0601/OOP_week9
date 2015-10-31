@@ -39,7 +39,7 @@ namespace HighLowCardGame
                 Console.WriteLine("!----------------------!");
                 //Console.ReadKey();
             } while (result != -1);
-            Control.FinishPlaying(player1, player2);
+            Control.FinishedPlaying(player1, player2);
             Console.ReadKey();
         }
     }
