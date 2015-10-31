@@ -8,17 +8,23 @@ namespace HighLowCardGame
 {
     class Deck
     {
-        public List<Card> Cards = new List<Card>();
+        public List<Card> Cards;
     
         //public int[,] cards = new int[4,13];
 
-        public Deck(int pValue = 13, int pSuit = 4)
+        public Deck()
         {
+            Cards = new List<Card>();
+        }
+
+        public Deck(int pValue = 13, int pSuit = 4) : this()
+        {
+            
             for (int i = 0; i < pValue; i++)
             {
                 for (int j = 0; j < pSuit; j++)
                 {
-                    Cards.Add(new Card { Value = i, Suit = j });
+                    Cards.Add(new Card { Value = i + 1, Suit = j + 1 });
                     //Console.WriteLine("Added new card (value = " + i + ", suit = " + j + ") to the list.");
                 }
             }
@@ -33,6 +39,14 @@ namespace HighLowCardGame
                 var temp = Cards[i];
                 Cards[i] = Cards[j];
                 Cards[j] = temp;
+            }
+        }
+
+        public void ViewCardsinDeck()
+        {
+            foreach (Card p1Card in this.Cards)
+            {
+                Console.WriteLine(p1Card);
             }
         }
     }
