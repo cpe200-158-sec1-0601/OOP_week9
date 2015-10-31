@@ -10,13 +10,15 @@ namespace HighLowCardGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("~ Setting up the High-Low Card Game ~");
-            Deck base_deck = new Deck();
-            base_deck.Shuffle();
-            foreach (Card aCard in base_deck.Cards)
-            {
-                Console.WriteLine(aCard);
-            }
+            Player player1 = new Player();
+            Player player2 = new Player();
+            Control.SettingUp();
+            Control.NewPlayers(player1, player2, "Sloth", "Death");
+            Control.GivePlayerADeck(player1, player2);
+            Console.WriteLine("[Player 1] Card deck is containing these cards :");
+            player1.PlayingDeck.ViewCardsinDeck();
+            Console.WriteLine("[Player 2] Card deck is containing these cards :");
+            player2.PlayingDeck.ViewCardsinDeck();
             Console.ReadKey();
         }
     }

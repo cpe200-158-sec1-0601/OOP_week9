@@ -22,13 +22,13 @@ namespace HighLowCardGame
             set;
         }
 
-        protected string[] suit =  { "Hearts", "Diamonds", "Clubs", "Spades" };
+        protected string[] suit = { "Clubs", "Diamonds", "Hearts", "Spades" };
         protected string[] face = { "Ace", "Deuce", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
 
         public override string ToString()
         {
             //return "Value: " + Value + "   Suit: " + Suit;
-            return "[CARD]: Value: " + face[Value] + "(" + Value + ") | Suit: " + suit[Suit] + "(" + Suit + ")";
+            return "[CARD]: Value: " + face[Value - 1] + "(" + Value + ") | Suit: " + suit[Suit - 1] + "(" + Suit + ")";
         }
 
         public Card()
