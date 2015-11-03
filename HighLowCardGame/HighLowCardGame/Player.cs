@@ -44,7 +44,7 @@ namespace HighLowCardGame
 
         public void ShowPlayerProperties()
         {
-            Console.WriteLine("[" + Name + "] \thas | " + PlayingDeck.Cards.Count + " playing card(s) |, | " + Count + " winning card(s) |");
+            Console.WriteLine("[" + Name + "] has | " + PlayingDeck.Cards.Count + " playing card(s) |, | " + Count + " winning card(s) |");
         }
     }
 }

@@ -9,21 +9,22 @@ namespace HighLowCardGame
     class Control
     {
         static Deck base_deck;
+        static bool tie = false;
         
         public static void SettingUp()
         {
-            Console.WriteLine("~ Setting up the High-Low Card Game ~");
+            //Console.WriteLine("~ Setting up the High-Low Card Game ~");
             base_deck = new Deck(13, 4);
             base_deck.Shuffle();
             //base_deck.ViewCardsinDeck();
-            Console.WriteLine("Base card deck is READY!");
+            //Console.WriteLine("Base card deck is READY!");
         }
         public static void NewPlayers(Player pPlayer1, Player pPlayer2, string pPlayerName1 = "Anonymous", string pPlayerName2 = "Anonymous")
         {
-            Console.WriteLine("Creating new two players...");
-            Console.Write("[" + pPlayer1.Name + "] What's your name? : ");
+            //Console.WriteLine("Creating new two players...");
+            Console.Write("[Player 1] What's your name? : ");
             pPlayerName1 = Console.ReadLine();
-            Console.Write("[" + pPlayer2.Name + "] What's your name? : ");
+            Console.Write("[Player 2] What's your name? : ");
             pPlayerName2 = Console.ReadLine();
             pPlayer1.Name = pPlayerName1;
             pPlayer2.Name = pPlayerName2;
@@ -35,19 +36,17 @@ namespace HighLowCardGame
             for (int i = 0; i < 26; i++)
             {
                 pPlayer1.PlayingDeck.Cards.Add(base_deck.Cards[i]);
-            }
-            for (int i = 0; i < 26; i++)
-            {
                 pPlayer2.PlayingDeck.Cards.Add(base_deck.Cards[i + 26]);
             }
-            Console.WriteLine("[Control] Two players card deck are each equal to the number of cards");
+            //Console.WriteLine("[Control] Two players card deck are each equal to the number of cards");
         }
 
         public static void PlayerWinTurn(Player pPlayer, int NumberofCards = 1)
         {
             pPlayer.Count += (NumberofCards) * 2;
+            if (tie) pPlayer.Count += 2;
             //Console.WriteLine("[WIN][Player " + pPlayer.Order + "] get 2 card into his/her pile");
-            Console.WriteLine("[WIN][" + pPlayer.Name + "] get 2 card into his/her pile");
+            Console.WriteLine("[Winner = " + pPlayer.Name + "] get " + (NumberofCards * 2) + " card into his/her pile");
         }
         public static void TieTurn(Player pPlayer1, Player pPlayer2)
         {
@@ -57,6 +56,7 @@ namespace HighLowCardGame
             {
                 pPlayer2.PlayingDeck.Shuffle();
             }
+            tie = true;
         }
 
         public static void RemovePlayerCards(Player pPlayer1, Player pPlayer2, int range)
@@ -69,6 +69,7 @@ namespace HighLowCardGame
 
         public static int CompareCardDeck(Player pPlayer1, Player pPlayer2)
         {
+            tie = false;
             if (pPlayer1.PlayingDeck.Cards.Count == 0) // No longer be playing
             {
                 Console.WriteLine("[Summary] No more card left in the both players card deck");
@@ -77,8 +78,9 @@ namespace HighLowCardGame
             int LastCard = pPlayer1.PlayingDeck.Cards.Count - 1;
             int pPlayer1_last = pPlayer1.PlayingDeck.Cards[LastCard].Value;
             int pPlayer2_last = pPlayer2.PlayingDeck.Cards[LastCard].Value;
-            Console.WriteLine("[" + pPlayer1.Name + "] \thas " + pPlayer1.PlayingDeck.Cards[LastCard]);
-            Console.WriteLine("[" + pPlayer2.Name + "] \thas " + pPlayer2.PlayingDeck.Cards[LastCard]);
+            // Show a top card of each players
+            Console.WriteLine("[" + pPlayer1.Name + "] has " + pPlayer1.PlayingDeck.Cards[LastCard], -30);
+            Console.WriteLine("[" + pPlayer2.Name + "] has " + pPlayer2.PlayingDeck.Cards[LastCard]);
             if (pPlayer1.PlayingDeck.Cards.Count == 1 && pPlayer1.PlayingDeck.Cards[LastCard].Value == pPlayer2.PlayingDeck.Cards[LastCard].Value) // No longer be playing
             {
                 Console.WriteLine("[Tie] The last card of both players is the same.");
@@ -112,13 +114,9 @@ namespace HighLowCardGame
                 int NumberFromLastCard = pPlayer1_last;
                 if (NumberFromLastCard > LastCard) // More value of the card than number of left cards
                 {
-                    TieTurn(pPlayer1, pPlayer2);
-                    //Console.WriteLine("== [" + pPlayer1.Name + "] Card deck is containing these cards :");
-                    //pPlayer1.PlayingDeck.ViewCardsinDeck();
-                    //Console.WriteLine("== [" + pPlayer2.Name + "] Card deck is containing these cards :");
-                    //pPlayer2.PlayingDeck.ViewCardsinDeck();
-                    //Console.ReadKey();
-                    return 0;
+                    //TieTurn(pPlayer1, pPlayer2);
+                    NumberFromLastCard = LastCard;
+                    //return 0;
                 }
                 Console.WriteLine("[" + pPlayer1.Name + "] has " + pPlayer1.PlayingDeck.Cards[NumberFromLastCard]);
                 Console.WriteLine("[" + pPlayer2.Name + "] has " + pPlayer2.PlayingDeck.Cards[NumberFromLastCard]);
@@ -162,7 +160,12 @@ namespace HighLowCardGame
         public static void FinishedPlaying(Player pPlayer1, Player pPlayer2)
         {
             Console.WriteLine("");
-            Console.WriteLine("=== [ The winner is " + (pPlayer1.Count > pPlayer2.Count ? pPlayer1.Name : pPlayer2.Name) +" ] ===");
+            string WinningMSG = "=== [ The winner is ";
+            if (pPlayer1.Count > pPlayer2.Count) WinningMSG += pPlayer1.Name;
+            else if (pPlayer2.Count > pPlayer1.Count) WinningMSG += pPlayer2.Name;
+            else WinningMSG += "NO ONE";
+            WinningMSG += "] ===";
+            Console.WriteLine(WinningMSG);
         }
     }
 }

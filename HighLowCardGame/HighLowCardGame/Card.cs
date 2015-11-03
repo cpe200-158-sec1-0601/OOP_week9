@@ -28,7 +28,8 @@ namespace HighLowCardGame
         public override string ToString()
         {
             //return "Value: " + Value + "   Suit: " + Suit;
-            return "[CARD]: Value: " + face[Value - 1] + "(" + Value + ")| Suit: " + suit[Suit - 1] + "(" + Suit + ")";
+            return face[Value - 1] + "(" + Value + ") " + suit[Suit - 1] + "(" + Suit + ")";
+            //return "[TOP CARD]: Value: " + face[Value - 1] + "(" + Value + ")| Suit: " + suit[Suit - 1] + "(" + Suit + ")";
         }
 
         public Card()

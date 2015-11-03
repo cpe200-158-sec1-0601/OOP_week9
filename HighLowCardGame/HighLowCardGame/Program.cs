@@ -17,10 +17,10 @@ namespace HighLowCardGame
             Control.GivePlayerADeck(player1, player2);
 
             // Display all cards in both player decks
-            Console.WriteLine("== [" + player1.Name + "] Card deck is containing these cards :");
-            player1.PlayingDeck.ViewCardsinDeck();
-            Console.WriteLine("== [" + player2.Name + "] Card deck is containing these cards :");
-            player2.PlayingDeck.ViewCardsinDeck();
+            //Console.WriteLine("== [" + player1.Name + "] Card deck is containing these cards :");
+            //player1.PlayingDeck.ViewCardsinDeck();
+            //Console.WriteLine("== [" + player2.Name + "] Card deck is containing these cards :");
+            //player2.PlayingDeck.ViewCardsinDeck();
 
             Console.WriteLine("");
             Console.WriteLine("> STARTING GAME <");
@@ -31,6 +31,8 @@ namespace HighLowCardGame
             {
                 Console.WriteLine("___ {Turn " + turn + " } ___ ");
                 //Console.WriteLine("Comparing player 1 and player 2 card deck");
+                //Console.Write("{0, -35}", "[" + player1.Name + "]");
+                //Console.WriteLine("{0, -35}", "[" + player2.Name + "]");
                 result = Control.CompareCardDeck(player1, player2);
                 player1.ShowPlayerProperties();
                 player2.ShowPlayerProperties();
