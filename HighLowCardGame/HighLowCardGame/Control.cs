@@ -21,10 +21,14 @@ namespace HighLowCardGame
         public static void NewPlayers(Player pPlayer1, Player pPlayer2, string pPlayerName1 = "Anonymous", string pPlayerName2 = "Anonymous")
         {
             Console.WriteLine("Creating new two players...");
+            Console.Write("[" + pPlayer1.Name + "] What's your name? : ");
+            pPlayerName1 = Console.ReadLine();
+            Console.Write("[" + pPlayer2.Name + "] What's your name? : ");
+            pPlayerName2 = Console.ReadLine();
             pPlayer1.Name = pPlayerName1;
             pPlayer2.Name = pPlayerName2;
-            Console.WriteLine("Player 1 is " + pPlayer1.Name);
-            Console.WriteLine("Player 2 is " + pPlayer2.Name);
+            Console.WriteLine("[" + pPlayer1.Name + "] is " + pPlayer1.Name);
+            Console.WriteLine("[" + pPlayer2.Name + "] is " + pPlayer2.Name);
         }
         public static void GivePlayerADeck(Player pPlayer1, Player pPlayer2)
         {
@@ -42,13 +46,14 @@ namespace HighLowCardGame
         public static void PlayerWinTurn(Player pPlayer, int NumberofCards = 1)
         {
             pPlayer.Count += (NumberofCards) * 2;
-            Console.WriteLine("[WIN][Player " + pPlayer.Order + "] PlayerWinTurn get 2 card into his/her pile");
+            //Console.WriteLine("[WIN][Player " + pPlayer.Order + "] get 2 card into his/her pile");
+            Console.WriteLine("[WIN][" + pPlayer.Name + "] get 2 card into his/her pile");
         }
         public static void TieTurn(Player pPlayer1, Player pPlayer2)
         {
             Console.WriteLine("[Tie] Reshuffle the both players card deck");
             pPlayer1.PlayingDeck.Shuffle();
-            if (pPlayer1.PlayingDeck.Cards.Count != 2)
+            //if (pPlayer1.PlayingDeck.Cards.Count != 2)
             {
                 pPlayer2.PlayingDeck.Shuffle();
             }
@@ -59,7 +64,7 @@ namespace HighLowCardGame
             int LastCard = pPlayer1.PlayingDeck.Cards.Count - 1;
             pPlayer1.PlayingDeck.Cards.RemoveRange(LastCard - range + 1, range);
             pPlayer2.PlayingDeck.Cards.RemoveRange(LastCard - range + 1, range);
-            Console.WriteLine("[Remove] " + range + " card(s) of both players card deck");
+            //Console.WriteLine("[Remove] " + range + " card(s) of both players card deck");
         }
 
         public static int CompareCardDeck(Player pPlayer1, Player pPlayer2)
@@ -72,8 +77,8 @@ namespace HighLowCardGame
             int LastCard = pPlayer1.PlayingDeck.Cards.Count - 1;
             int pPlayer1_last = pPlayer1.PlayingDeck.Cards[LastCard].Value;
             int pPlayer2_last = pPlayer2.PlayingDeck.Cards[LastCard].Value;
-            Console.WriteLine("Player 1 has " + pPlayer1.PlayingDeck.Cards[LastCard]);
-            Console.WriteLine("Player 2 has " + pPlayer2.PlayingDeck.Cards[LastCard]);
+            Console.WriteLine("[" + pPlayer1.Name + "] \thas " + pPlayer1.PlayingDeck.Cards[LastCard]);
+            Console.WriteLine("[" + pPlayer2.Name + "] \thas " + pPlayer2.PlayingDeck.Cards[LastCard]);
             if (pPlayer1.PlayingDeck.Cards.Count == 1 && pPlayer1.PlayingDeck.Cards[LastCard].Value == pPlayer2.PlayingDeck.Cards[LastCard].Value) // No longer be playing
             {
                 Console.WriteLine("[Tie] The last card of both players is the same.");
@@ -98,9 +103,9 @@ namespace HighLowCardGame
                 }
                 if (!Continue_Game)
                 {
-                    Console.WriteLine("== [Player 1] Card deck is containing these cards :");
+                    Console.WriteLine("== [" + pPlayer1.Name + "] Card deck is containing these cards :");
                     pPlayer1.PlayingDeck.ViewCardsinDeck();
-                    Console.WriteLine("== [Player 2] Card deck is containing these cards :");
+                    Console.WriteLine("== [" + pPlayer2.Name + "] Card deck is containing these cards :");
                     pPlayer2.PlayingDeck.ViewCardsinDeck();
                     return -1;
                 }
@@ -108,15 +113,15 @@ namespace HighLowCardGame
                 if (NumberFromLastCard > LastCard) // More value of the card than number of left cards
                 {
                     TieTurn(pPlayer1, pPlayer2);
-                    Console.WriteLine("== [Player 1] Card deck is containing these cards :");
-                    pPlayer1.PlayingDeck.ViewCardsinDeck();
-                    Console.WriteLine("== [Player 2] Card deck is containing these cards :");
-                    pPlayer2.PlayingDeck.ViewCardsinDeck();
+                    //Console.WriteLine("== [" + pPlayer1.Name + "] Card deck is containing these cards :");
+                    //pPlayer1.PlayingDeck.ViewCardsinDeck();
+                    //Console.WriteLine("== [" + pPlayer2.Name + "] Card deck is containing these cards :");
+                    //pPlayer2.PlayingDeck.ViewCardsinDeck();
                     //Console.ReadKey();
                     return 0;
                 }
-                Console.WriteLine("Player 1 has " + pPlayer1.PlayingDeck.Cards[NumberFromLastCard]);
-                Console.WriteLine("Player 2 has " + pPlayer2.PlayingDeck.Cards[NumberFromLastCard]);
+                Console.WriteLine("[" + pPlayer1.Name + "] has " + pPlayer1.PlayingDeck.Cards[NumberFromLastCard]);
+                Console.WriteLine("[" + pPlayer2.Name + "] has " + pPlayer2.PlayingDeck.Cards[NumberFromLastCard]);
                 int pPlayer1_fromlast = pPlayer1.PlayingDeck.Cards[NumberFromLastCard].Value;
                 int pPlayer2_fromlast = pPlayer2.PlayingDeck.Cards[NumberFromLastCard].Value;
                 if (pPlayer1_fromlast < pPlayer2_fromlast) // Player 1 WIN
@@ -157,7 +162,7 @@ namespace HighLowCardGame
         public static void FinishedPlaying(Player pPlayer1, Player pPlayer2)
         {
             Console.WriteLine("");
-            Console.WriteLine("=== [ The winner is " + (pPlayer1.Count > pPlayer2.Count ? "player 1" : "player 2") +" ] ===");
+            Console.WriteLine("=== [ The winner is " + (pPlayer1.Count > pPlayer2.Count ? pPlayer1.Name : pPlayer2.Name) +" ] ===");
         }
     }
 }

@@ -42,9 +42,9 @@ namespace HighLowCardGame
             Order = pOrder;
         }
 
-        public void ShowPlayerScore()
+        public void ShowPlayerProperties()
         {
-            Console.WriteLine("[Player " + Order + "] has " + Count + " counting card in his/her pile");
+            Console.WriteLine("[" + Name + "] \thas | " + PlayingDeck.Cards.Count + " playing card(s) |, | " + Count + " winning card(s) |");
         }
     }
 }
